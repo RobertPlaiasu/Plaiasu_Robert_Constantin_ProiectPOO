@@ -16,14 +16,14 @@ private:
 	int nrSemnaturi;
 	std::string taraFabricatie;
 	bool obiectDeColectie;
-	int pret;
+	int pret = 0;
 	// mingea are emblema unui club sportiv
 	std::string clubSportiv;
 
 public:
 	MingeFotbal(const MingeFotbal& minge) : id(minge.id)
 	{
-		setPret(minge.pret);
+		this->pret = minge.pret;
 		setTaraFabricati(minge.taraFabricatie);
 		setSemnaturi(minge.nrSemnaturi, minge.semnaturi);
 		setClubSportiv(minge.clubSportiv);
@@ -190,13 +190,15 @@ public:
 		this->taraFabricatie = taraFabricatie;
 	}
 
-	int getPret()
+	float getPret()
 	{
 		return (float)pret / 100;
 	}
 
 	void setPret(int pretNou)
 	{
+		if (this->obiectDeColectie)
+			MingeFotbal::valoareMingiDeColectie = MingeFotbal::valoareMingiDeColectie - pret + pretNou;
 		pret = pretNou;
 	}
 
@@ -224,6 +226,88 @@ public:
 	{
 		return id;
 	}
+
+	MingeFotbal& operator=(const MingeFotbal& minge)
+	{
+		if (this != &minge)
+		{
+			setPret(minge.pret);
+			setTaraFabricati(minge.taraFabricatie);
+			setSemnaturi(minge.nrSemnaturi, minge.semnaturi);
+			setClubSportiv(minge.clubSportiv);
+			setObiectDeColetie(minge.obiectDeColectie);
+			if (obiectDeColectie)
+			{
+				nrMingiDeColectie++;
+			}
+		}
+		return *this;
+	}
+
+	char* operator[](int index)
+	{
+		char* semnatura = new char[strlen(this->semnaturi[index])+1];
+		strcpy_s(semnatura,strlen(this->semnaturi[index])+1, this->semnaturi[index]);
+		return semnatura;
+	}
+
+	friend std::ostream& operator<<(std::ostream& out, MingeFotbal& minge)
+	{
+		out << "\n\n";
+		out << "id : " << minge.id << "\ntara de fabricatie : " << minge.taraFabricatie << "\npret : " << minge.pret/100 << "." << minge.pret % 100 << "\nclub sportiv:" << minge.clubSportiv
+			<< "\nnr de semnaturi : " << minge.nrSemnaturi;
+		for (int i = 0; i < minge.nrSemnaturi; i++)
+		{
+			out << "\n" << i + 1 << " : " << minge.semnaturi[i];
+		}
+		if (minge.obiectDeColectie)
+		{
+			out << "\nEste obiect de colectie";
+		}
+		else
+		{
+			out << "\nNu este obiect de colectie";
+		}
+
+		return out;
+	}
+
+	friend std::istream& operator>>(std::istream& in, MingeFotbal& minge)
+	{
+		std::cout << "\nTara fabricatie : ";
+		in >> minge.taraFabricatie;
+		std::cout << "\nClub sportiv : ";
+		in >> minge.clubSportiv;
+		std::cout << "\nPret : ";
+		in >> minge.pret;
+		std::cout << "\nObiect de colectie : ";
+		in >> minge.obiectDeColectie;
+		if (minge.semnaturi != NULL)
+		{
+			for (int i = 0; i < minge.nrSemnaturi; i++)
+			{
+				delete[] minge.semnaturi[i];
+			}
+			delete[] minge.semnaturi;
+		}
+		std::cout << "\nNr semnaturi : ";
+		in >> minge.nrSemnaturi;
+		if (minge.nrSemnaturi > 0)
+		{
+			minge.semnaturi = new char* [minge.nrSemnaturi];
+			for (int i = 0; i < minge.nrSemnaturi; i++)
+			{
+				std::string aux;
+				std::cout << "\nSemnatura " << i + 1 << " : ";
+				in >> aux;
+				minge.semnaturi[i] = new char[aux.length()+1];
+				strcpy_s(minge.semnaturi[i], aux.length() +1, aux.c_str());
+			}
+		}
+		return in;
+	}
+	
+
 
 	friend int calculareDiferentePret(MingeFotbal& m1, MingeFotbal& m2);
 };
@@ -401,7 +485,7 @@ public:
 		this->culoare = culoare;
 	}
 
-	int getPret()
+	float getPret()
 	{
 		return (float)pret / 100;
 	}
@@ -425,6 +509,41 @@ public:
 	{
 		return id;
 	}
+
+	CenturaBjj& operator=(const CenturaBjj& centura)
+	{
+		if (this != &centura)
+		{
+			this->pret = centura.pret;
+			setTaraFabricatie(centura.taraFabricatie);
+			setDungi(centura.nrDungi, centura.dungi);
+			setCuloare(centura.culoare);
+			setFirmaProductoare(centura.firmaProducatoare);
+		}
+		return *this;
+	}
+
+	bool operator==(const CenturaBjj& centura)
+	{
+		return this->culoare == centura.culoare;
+	}
+
+	operator std::string()
+	{
+		return this->culoare;
+	}
+
+	operator float()
+	{
+		return getPret();
+	}
+
+	operator int()
+	{
+		return pret;
+	}
+
+
 
 };
 
@@ -603,7 +722,7 @@ public:
 		this->culoare = culoare;
 	}
 
-	int getPret()
+	float getPret()
 	{
 		return (float)pret/100;
 	}
@@ -626,6 +745,47 @@ public:
 	int getId()
 	{
 		return id;
+	}
+
+	GiBjj& operator=(const GiBjj& gi)
+	{
+		if (this != &gi)
+		{
+			setPret(gi.pret);
+			setTaraFabricatie(gi.taraFabricatie);
+			setMaterialeTextile(gi.nrMaterialeTextile, gi.materialeTextie);
+			setCuloare(gi.culoare);
+			setFirmaProductoare(gi.firmaProducatoare);
+		}
+		return *this;
+	}
+
+	char* operator[](int index)
+	{
+		return this->materialeTextie[index];
+	}
+
+	bool operator>(const GiBjj& gi)
+	{
+		return this->pret > gi.pret;
+	}
+
+	bool operator<(const GiBjj& gi)
+	{
+		return this->pret < gi.pret;
+	}
+
+	GiBjj operator++()
+	{
+		this->pret += 100;
+		return *this;
+	}
+
+	GiBjj operator++(int i)
+	{
+		GiBjj gi(*this);
+		gi.pret += 100;
+		return gi;
 	}
 
 	friend bool validareId(GiBjj& gi);
@@ -702,6 +862,11 @@ void main()
 	delete[] semnaturi[1];
 	delete[] semnaturi;
 
+	minge1 = minge2;	
+	std::cout << minge1;
+	std::cin >> minge1;
+	std::cout << minge1;
+
 	Data* date = new Data[2];
 	date[0].an = 2020;
 	date[0].luna = 3;
@@ -726,6 +891,11 @@ void main()
 	centura2.setDungi(2, date);
 	centura2.setCuloare("alb");
 	centura2.setFirmaProductoare("Tatami");
+
+	centura1 = centura2;
+	std::cout << std::endl << (std::string)centura1;
+	std::cout << std::endl << (float)centura1;
+	std::cout << std::endl <<(int)centura1;
 
 	std::cout << centura2.getPret() << "\n";
 	std::cout << centura2.getTaraFabricatie() << "\n";
@@ -770,8 +940,22 @@ void main()
 	if (error)
 		std::cout << "\nId-ul nu este valid";
 
+	gi1 = gi2;
+	if (gi1 > gi2)
+		std::cout << "\nPretul gi1 este mai mare decat gi2 \n";
+	else  if (gi1 < gi2)
+		std::cout << "\nPretul gi2 este mai mare decat gi1 \n";
+	else
+		std::cout << "\nPretul este egal \n";
+
+	gi1++;
+	std::cout << "\n" << gi1.getPret();
+
+
 	delete[] materiale[0];
 	delete[] materiale[1];
 	delete[] materiale;
+
+
 
 }
