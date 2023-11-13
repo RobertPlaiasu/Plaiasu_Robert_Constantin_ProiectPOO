@@ -21,6 +21,16 @@ private:
 	std::string clubSportiv;
 
 public:
+	
+	MingeFotbal() : id(100)
+	{
+		semnaturi = NULL;
+		nrSemnaturi = 0;
+		taraFabricatie = "";
+		obiectDeColectie = 0;
+		clubSportiv = "";
+	}
+	
 	MingeFotbal(const MingeFotbal& minge) : id(minge.id)
 	{
 		this->pret = minge.pret;
@@ -339,6 +349,16 @@ private:
 	
 	std::string firmaProducatoare;
 public:
+	CenturaBjj() : id(100)
+	{
+		dungi = NULL;
+		nrDungi = 0;
+		culoare = "";
+		taraFabricatie = "";
+		pret = 0;
+		firmaProducatoare = "";
+	}
+
 	CenturaBjj(CenturaBjj& centura) : id(centura.id)
 	{
 		setPret(centura.pret);
@@ -543,7 +563,51 @@ public:
 		return pret;
 	}
 
+	friend std::istream& operator>>(std::istream& in, CenturaBjj& centura)
+	{
+		std::cout << "\nTara fabricatie : ";
+		in >> centura.taraFabricatie;
+		std::cout << "\nCuloare : ";
+		in >> centura.culoare;
+		std::cout << "\nPret : ";
+		in >> centura.pret;
+		std::cout << "\nFirma producatoare : ";
+		in >> centura.firmaProducatoare;
+		if (centura.dungi != NULL)
+		{
+			delete[] centura.dungi;
+		}
+		std::cout << "\nNr dungi : ";
+		in >> centura.nrDungi;
+		if (centura.nrDungi > 0)
+		{
+			centura.dungi = new Data[centura.nrDungi];
+			for (int i = 0; i < centura.nrDungi; i++)
+			{
+				std::cout << "\nAn : ";
+				in >> centura.dungi[i].an;
+				std::cout << "\nLuna : ";
+				in >> centura.dungi[i].luna;
+				std::cout << "\nZi : ";
+				in >> centura.dungi[i].zi;
+			
+			}
+		}
+		return in;
+	}
 
+	friend std::ostream& operator<<(std::ostream& out, CenturaBjj& centura)
+	{
+		out << "\n\n";
+		out << "id : " << centura.id << "\ntara de fabricatie : " << centura.taraFabricatie << "\npret : " << centura.pret / 100 << "." << centura.pret % 100 << "\nfirma producatoare : " << centura.firmaProducatoare
+			<< "\nculoare : " << centura.culoare << "\nnr de stripe-uri : " << centura.nrDungi;
+		for (int i = 0; i < centura.nrDungi; i++)
+		{
+			out << "\n" << i + 1 << " : " << centura.dungi[i].an << "." << centura.dungi[i].luna << "." << centura.dungi[i].zi;
+		}
+
+		return out;
+	}
 
 };
 
@@ -568,6 +632,16 @@ private:
 
 
 public:
+	GiBjj() : id(100)
+	{
+		materialeTextie = NULL;
+		nrMaterialeTextile = 0;
+		culoare = "";
+		taraFabricatie = "";
+		pret = 0;
+		firmaProducatoare = "";
+	}
+
 	GiBjj(GiBjj& gi) : id(gi.id)
 	{
 		setPret(gi.pret);
@@ -789,6 +863,51 @@ public:
 	}
 
 	friend bool validareId(GiBjj& gi);
+
+	friend std::istream& operator>>(std::istream& in, GiBjj& gi)
+	{
+		std::cout << "\nTara fabricatie : ";
+		in >> gi.taraFabricatie;
+		std::cout << "\nCuloare : ";
+		in >> gi.culoare;
+		std::cout << "\nPret : ";
+		in >> gi.pret;
+		std::cout << "\nFirma producatoare : ";
+		in >> gi.firmaProducatoare;
+		if (gi.materialeTextie != NULL)
+		{
+			delete[] gi.materialeTextie;
+		}
+		std::cout << "\nNr materiale textile : ";
+		in >> gi.nrMaterialeTextile;
+		if (gi.nrMaterialeTextile > 0)
+		{
+			gi.materialeTextie = new char*[gi.nrMaterialeTextile];
+			for (int i = 0; i < gi.nrMaterialeTextile; i++)
+			{
+				std::string aux;
+				std::cout << "\nMaterial textil : ";
+				in >> aux;
+				gi.materialeTextie[i] = new char[aux.length() + 1];
+				strcpy_s(gi.materialeTextie[i],aux.length() + 1,aux.c_str());
+			}
+		}
+
+
+		return in;
+	}
+
+	friend std::ostream& operator<<(std::ostream& out, GiBjj& gi)
+	{
+		out << "\n\n";
+		out << "id : " << gi.id << "\ntara de fabricatie : " << gi.taraFabricatie << "\npret : " << gi.pret / 100 << "." << gi.pret % 100 << "\nfirma producatoare : " << gi.firmaProducatoare
+			<< "\nculoare : " << gi.culoare << "\nmateriale textile continute : " << gi.nrMaterialeTextile;
+		for (int i = 0; i < gi.nrMaterialeTextile; i++)
+		{
+			std::cout << "\n" << gi.materialeTextie[i];
+		}
+		return out;
+	}
 };
 
 
@@ -827,8 +946,8 @@ void main()
 	GiBjj::setSport("Bjj");
 	GiBjj::setNrGi(0);
 	GiBjj::setValoareTotala(0);
-
-	char** semnaturi = new char* [2];
+	
+	/*char** semnaturi = new char* [2];
 	semnaturi[0] = new char[strlen("Ronaldo") + 1];
 	semnaturi[1] = new char[strlen("Messi") + 1];
 	strcpy_s(semnaturi[0],strlen("Ronaldo")+1,"Ronaldo");
@@ -954,8 +1073,75 @@ void main()
 
 	delete[] materiale[0];
 	delete[] materiale[1];
-	delete[] materiale;
+	delete[] materiale;*/
+	
+	int n;
+	
+	std::cout << "\nNr mingii :";
+	std::cin >> n;
+	MingeFotbal* mingii = new MingeFotbal[n];
+	for (int i = 0; i < n; i++)
+	{
+		std::cin >> mingii[i];
+	}
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << mingii[i];
+	}
+	
+	delete[] mingii;
 
+	std::cout << "\nNr centuri :";
+	std::cin >> n;
+	CenturaBjj* centuri = new CenturaBjj[n];
+	for (int i = 0; i < n; i++)
+	{
+		std::cin >> centuri[i];
+	}
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << centuri[i];
+	}
 
+	delete[] centuri;
+
+	std::cout << "\nNr gi-uri : ";
+	std::cin >> n;
+	GiBjj* giuri = new GiBjj[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cin >> giuri[i];
+	}
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << giuri[i];
+	}
+	
+	std::cout << "\nNr linii si coloane gi matrice : ";
+	std::cin >> n;
+	GiBjj** matrix = new GiBjj * [n];
+	for (int i = 0; i < n; i++)
+	{
+		matrix[i] = new GiBjj[n];
+		for (int j = 0; j < n; j++)
+		{
+			std::cin >> matrix[i][j];
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			std::cout << matrix[i][j];;
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		delete[] matrix[i];
+	}
+	delete[] matrix;
 
 }
