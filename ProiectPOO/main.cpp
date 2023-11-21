@@ -3,6 +3,7 @@
 
 // Am ales tema Sport - Plaiasu Robert
 
+
 class MingeFotbal
 {
 private:
@@ -910,6 +911,96 @@ public:
 	}
 };
 
+class EchipamentBjj
+{
+private:
+	const int id;
+	CenturaBjj centura;
+	GiBjj gi;
+	std::string proprietar;
+
+public:
+	EchipamentBjj() : id(100)
+	{
+		proprietar = "Nu are proprietar !";
+		centura = CenturaBjj();
+		gi = GiBjj();
+	}
+
+	EchipamentBjj(int id, CenturaBjj& centura, GiBjj& gi, std::string proprietar) : id(id)
+	{
+		this->centura = centura;
+		this->gi = gi;
+		this->proprietar = proprietar;
+	}
+
+	EchipamentBjj(const EchipamentBjj& echipament) : id(echipament.id)
+	{
+		this->centura = echipament.centura;
+		this->gi = echipament.gi;
+		this->proprietar = echipament.proprietar;
+	}
+
+	~EchipamentBjj()
+	{
+	}
+
+	void setCentura(const CenturaBjj& centura)
+	{
+		this->centura = centura;
+	}
+
+	CenturaBjj& getCentura()
+	{
+		return centura;
+	}
+
+	void setGi(const GiBjj& gi)
+	{
+		this->gi = gi;
+	}
+
+	GiBjj& getGi()
+	{
+		return  this->gi;
+	}
+
+	void setProprietar(const std::string proprietar)
+	{
+		this->proprietar = proprietar;
+	}
+
+	std::string getProprietar()
+	{
+		return proprietar;
+	}
+
+
+	EchipamentBjj& operator=(const EchipamentBjj& echipament)
+	{
+		this->centura = echipament.centura;
+		this->gi = echipament.gi;
+		this->proprietar = echipament.proprietar;
+		return *this;
+	}
+
+	explicit operator GiBjj& ()
+	{
+		return gi;
+	}
+
+	friend std::ostream& operator<<(std::ostream& out, EchipamentBjj& echipament)
+	{
+		out << "\nID : " << echipament.id;
+		out << "\nProprietar : " << echipament.proprietar;
+
+		out << echipament.gi;
+		out << echipament.centura;
+
+		return out;
+	}
+};
+
 
 int calculareDiferentePret(MingeFotbal &m1, MingeFotbal &m2)
 {
@@ -1075,6 +1166,8 @@ void main()
 	delete[] materiale[1];
 	delete[] materiale;*/
 	
+    // faza 4
+	/*
 	int n;
 	
 	std::cout << "\nNr mingii :";
@@ -1143,5 +1236,30 @@ void main()
 		delete[] matrix[i];
 	}
 	delete[] matrix;
+	*/
+	
+	GiBjj gi;
+	GiBjj gi1(1, 22, "Vietnam", "Negru");
+	CenturaBjj centura;
+	CenturaBjj centura1(1,22,"Vietnam", "Negru");
+	EchipamentBjj echipament1;
+	EchipamentBjj echipament2(1,centura,gi,"echipament");
+	EchipamentBjj echipament3(echipament2);
+	echipament3.setCentura(centura1);
+	echipament3.setGi(gi1);
+	echipament3.setProprietar("Nou proprietar");
+	std::cout << echipament1;
+	std::cout << echipament2;
+	std::cout << echipament3;
+
+	echipament2 = echipament3;
+
+	
+	std::cout<<"\n\n\n" << echipament2;
+
+	std::cout << echipament2.getProprietar();
+	std::cout << echipament2.getGi();
+	std::cout << echipament2.getCentura();
+
 
 }
