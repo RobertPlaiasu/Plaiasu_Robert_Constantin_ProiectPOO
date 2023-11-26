@@ -127,7 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CenturaBjj.cpp" />
+    <ClCompile Include="EchipamentBjj.cpp" />
+    <ClCompile Include="GiBjj.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MingeFotbal.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CenturaBjj.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="EchipamentBjj.h" />
+    <ClInclude Include="GiBjj.h" />
+    <ClInclude Include="MingeFotbal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

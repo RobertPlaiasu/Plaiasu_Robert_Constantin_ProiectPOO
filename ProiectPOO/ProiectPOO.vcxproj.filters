@@ -18,5 +18,34 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MingeFotbal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CenturaBjj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GiBjj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EchipamentBjj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MingeFotbal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CenturaBjj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GiBjj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EchipamentBjj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
