@@ -241,6 +241,7 @@ void main()
 
 	// faza 5
 	
+	/*
 	GiBjj gi;
 	GiBjj gi1(1, 22, "Vietnam", "Negru");
 	CenturaBjj centura;
@@ -264,9 +265,69 @@ void main()
 	std::cout << echipament2.getGi();
 	std::cout << echipament2.getCentura();
 	
-	
+	*/
 
 	// faza 6
-
 	
+	std::string nume1 = "Nume1";
+	std::string nume2 = "Nume2";
+	char** nume = new char* [2];
+	nume[0] = new char[nume1.length() + 1];
+	nume[1] = new char[nume2.length() + 1];
+	strcpy_s(nume[0],nume1.length() + 1, nume1.c_str());
+	strcpy_s(nume[1], nume2.length() + 1, nume2.c_str());
+
+	MingeFotbal minge(89, 76676, "US",nume, 2, "Chelsea", 0);
+	std::ofstream f1;
+	f1.open("minge.txt", std::ios::out);
+	f1 << minge;
+	f1.close();
+
+	MingeFotbal minge1;
+	std::ifstream f2;
+	f2.open("minge.txt",std::ios::in);
+	f2 >> minge1;
+	std::cout << minge1;
+	f2.close();
+
+
+	Data dungi;
+	dungi.an = 2020;
+	dungi.luna = 9;
+	dungi.zi = 29;
+	CenturaBjj centura(88,99999,"Romania",&dungi,1,"negru","tatami");
+	std::ofstream f3;
+	f3.open("centura.txt", std::ios::out);
+	f3 << centura;
+	f3.close();
+	CenturaBjj centura1;
+	std::ifstream f4;
+	f4.open("centura.txt", std::ios::in);
+	f4 >> centura1;
+	std::cout << centura1;
+	f4.close();
+
+	GiBjj gi;
+	std::ofstream f5;
+	f5.open("gi.bin",  std::ios::binary| std::ios::out);
+	f5 << gi;
+	f5.close();
+	GiBjj gi1;
+	std::ifstream f6;
+	f6.open("gi.bin", std::ios::binary | std::ios::in);
+	f6 >> gi;
+	std::cout << std::endl << gi;
+	f6.close();
+
+	EchipamentBjj echipament;
+	std::ofstream f7;
+	f7.open("echipament.bin",std::ios::binary | std::ios::out);
+	f7 << echipament;
+	f7.close();
+	EchipamentBjj echipament1;
+	std::ifstream f8;
+	f8.open("echipament.bin", std::ios::binary | std::ios::in);
+	f8 >> echipament1;
+	std::cout << echipament1;
+	f8.close();
 }

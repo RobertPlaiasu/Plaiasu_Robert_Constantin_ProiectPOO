@@ -87,5 +87,10 @@ public:
 	friend std::istream& operator>>(std::istream& in, CenturaBjj& centura);
 
 	friend std::ostream& operator<<(std::ostream& out, CenturaBjj& centura);
+
+	friend std::ifstream& operator>>(std::ifstream& in, CenturaBjj& centura);
+	friend std::ofstream& operator<<(std::ofstream& out, CenturaBjj& centura);
+	friend void citireFisierBinar(std::ifstream& in,CenturaBjj& centura);
+	friend void afisareFisierBinar(std::ofstream& out,CenturaBjj& centura);
 };
 

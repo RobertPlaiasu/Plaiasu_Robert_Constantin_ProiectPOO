@@ -37,5 +37,7 @@ public:
 	explicit operator GiBjj& ();
 
 	friend std::ostream& operator<<(std::ostream& out, EchipamentBjj& echipament);
+	friend std::ofstream& operator<<(std::ofstream& out, EchipamentBjj& echipament);
+	friend std::ifstream& operator>>(std::ifstream& in, EchipamentBjj& echipament);
 };
 

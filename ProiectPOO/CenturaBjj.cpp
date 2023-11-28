@@ -269,3 +269,92 @@ std::ostream& operator<<(std::ostream& out, CenturaBjj& centura)
 
 	return out;
 }
+
+std::ofstream& operator<<(std::ofstream& out, CenturaBjj& centura)
+{
+	out << centura.taraFabricatie << " " << centura.pret << " " << centura.firmaProducatoare << " " << centura.culoare << " " << centura.nrDungi;
+	for (int i = 0; i < centura.nrDungi; i++)
+	{
+		out<< " " << centura.dungi[i].an << " " << centura.dungi[i].luna << " " << centura.dungi[i].zi<< " ";
+	}
+	return out;
+}
+
+std::ifstream& operator>>(std::ifstream& in, CenturaBjj& centura)
+{
+	in >> centura.taraFabricatie >> centura.pret >> centura.firmaProducatoare >> centura.culoare >> centura.nrDungi;
+	if (centura.dungi != NULL)
+	{
+		delete[] centura.dungi;
+	}
+	centura.dungi = new Data[centura.nrDungi];
+	for (int i = 0; i < centura.nrDungi; i++)
+	{
+		in >> centura.dungi[i].an >> centura.dungi[i].luna >> centura.dungi[i].zi;
+	}
+	return in;
+}
+
+void citireFisierBinar(std::ifstream& in, CenturaBjj& centura)
+{
+	int lungime;
+	in.read((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		in.read((char*)&centura.taraFabricatie[i], sizeof(char));
+	}
+	in.read((char*)&centura.pret, sizeof(int));
+	in.read((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		in.read((char*)&centura.firmaProducatoare[i], sizeof(char));
+	}
+	in.read((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		in.read((char*)&centura.culoare[i], sizeof(char));
+	}
+	in.read((char*)&centura.nrDungi, sizeof(int));
+	if (centura.dungi != NULL)
+	{
+		delete[] centura.dungi;
+	}
+	centura.dungi = new Data[centura.nrDungi];
+	for (int i = 0; i < centura.nrDungi; i++)
+	{
+		in.read((char*)&centura.dungi[i].an, sizeof(int));
+		in.read((char*)&centura.dungi[i].luna, sizeof(int));
+		in.read((char*)&centura.dungi[i].zi, sizeof(int));
+		
+	}
+}
+
+void afisareFisierBinar(std::ofstream& out, CenturaBjj& centura)
+{
+	int lungime = centura.taraFabricatie.length() + 1;
+	out.write((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		out.write((char*)&centura.taraFabricatie[i], sizeof(char));
+	}
+	out.write((char*)&centura.pret, sizeof(int));
+	lungime = centura.firmaProducatoare.length() + 1;
+	out.write((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		out.write((char*)&centura.firmaProducatoare[i], sizeof(char));
+	}
+	lungime = centura.culoare.length() + 1;
+	out.write((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		out.write((char*)&centura.culoare[i], sizeof(char));
+	}
+	out.write((char*)&centura.nrDungi, sizeof(int));
+	for (int i = 0; i < centura.nrDungi; i++)
+	{
+		out.write((char*)&centura.dungi[i].an,sizeof(int));
+		out.write((char*)&centura.dungi[i].luna, sizeof(int));
+		out.write((char*)&centura.dungi[i].zi, sizeof(int));
+	}
+}

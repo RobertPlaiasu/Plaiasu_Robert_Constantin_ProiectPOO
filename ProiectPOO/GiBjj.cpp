@@ -290,3 +290,79 @@ bool validareId(GiBjj& gi)
 	return gi.id > 0;
 }
 
+
+std::ofstream& operator<<(std::ofstream& out, GiBjj& gi)
+{
+	int lungime = gi.taraFabricatie.length() + 1;
+	out.write((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		out.write((char*)&gi.taraFabricatie[i], sizeof(char));
+	}
+	out.write((char*)&gi.pret, sizeof(int));
+	lungime = gi.firmaProducatoare.length() + 1;
+	out.write((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		out.write((char*)&gi.firmaProducatoare[i], sizeof(char));
+	}
+	lungime = gi.culoare.length() + 1;
+	out.write((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		out.write((char*)&gi.culoare[i], sizeof(char));
+	}
+	out.write((char*)&gi.nrMaterialeTextile,sizeof(int));
+	for (int i = 0; i < gi.nrMaterialeTextile; i++)
+	{
+		lungime = strlen(gi.materialeTextie[i])+ 1;
+		out.write((char*)&lungime, sizeof(int));
+		for (int j = 0; j < lungime; j++)
+		{
+			out.write((char*)&gi.materialeTextie[i][j], sizeof(char));
+		}
+	}
+	return out;
+}
+
+
+std::ifstream& operator>>(std::ifstream& in, GiBjj& gi)
+{
+	int lungime;
+	in.read((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		in.read((char*)&gi.taraFabricatie[i], sizeof(char));
+	}
+	in.read((char*)&gi.pret, sizeof(int));
+	in.read((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		in.read((char*)&gi.firmaProducatoare[i], sizeof(char));
+	}
+	in.read((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		in.read((char*)&gi.culoare[i], sizeof(char));
+	}
+	in.read((char*)&gi.nrMaterialeTextile, sizeof(int));
+	if (gi.materialeTextie != NULL)
+	{
+		for (int i = 0; i < gi.nrMaterialeTextile; i++)
+		{
+			delete[] gi.materialeTextie[i];
+		}
+		delete[] gi.materialeTextie;
+	}
+	gi.materialeTextie = new char* [gi.nrMaterialeTextile];
+	for (int i = 0; i < gi.nrMaterialeTextile; i++)
+	{
+		in.read((char*)&lungime, sizeof(int));
+		gi.materialeTextie[i] = new char[lungime];
+		for (int j = 0; j < lungime; j++)
+		{
+			in.read((char*)&gi.materialeTextie[i][j], sizeof(char));
+		}
+	}
+	return in;
+}

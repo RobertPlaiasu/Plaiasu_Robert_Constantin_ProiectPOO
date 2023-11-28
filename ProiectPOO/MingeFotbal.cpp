@@ -270,21 +270,20 @@ std::ostream& operator<<(std::ostream& out, MingeFotbal& minge)
 
 std::ofstream& operator<<(std::ofstream& out, MingeFotbal& minge)
 {
-	out << minge.id << " " << minge.taraFabricatie << " " << minge.pret / 100 << "." << minge.pret % 100 << " " << minge.clubSportiv
+	out << minge.taraFabricatie << " " << minge.pret  << " " << minge.clubSportiv
 		<< " " << minge.nrSemnaturi;
 	for (int i = 0; i < minge.nrSemnaturi; i++)
 	{
-		out << " " << minge.semnaturi[i] << ",";
+		out << " " << minge.semnaturi[i] << " ";
 	}
 	if (minge.obiectDeColectie)
 	{
-		out << " Este obiect de colectie";
+		out << 1;
 	}
 	else
 	{
-		out << " Nu este obiect de colectie";
+		out << 0;
 	}
-	out << "\n";
 	return out;
 }
 
@@ -325,6 +324,40 @@ std::istream& operator>>(std::istream& in, MingeFotbal& minge)
 		minge.semnaturi = NULL;
 		minge.nrSemnaturi = 0;
 	}
+	return in;
+}
+
+std::ifstream& operator>>(std::ifstream& in, MingeFotbal& minge)
+{
+	
+	in >> minge.taraFabricatie;
+	in >> minge.pret;
+	in >> minge.clubSportiv;
+	if (minge.semnaturi != NULL)
+	{
+		for (int i = 0; i < minge.nrSemnaturi; i++)
+		{
+			delete[] minge.semnaturi[i];
+		}
+		delete[] minge.semnaturi;
+	}
+	in >> minge.nrSemnaturi;
+	if (minge.nrSemnaturi > 0)
+	{
+		minge.semnaturi = new char* [minge.nrSemnaturi];
+		for (int i = 0; i < minge.nrSemnaturi; i++)
+		{
+			std::string aux;
+			in >> aux;
+			minge.semnaturi[i] = new char[aux.length() + 1];
+			strcpy_s(minge.semnaturi[i], aux.length() + 1, aux.c_str());
+		}
+	}
+	else {
+		minge.semnaturi = NULL;
+		minge.nrSemnaturi = 0;
+	}
+	in >> minge.obiectDeColectie;
 	return in;
 }
 

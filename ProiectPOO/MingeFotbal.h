@@ -77,6 +77,8 @@ public:
 
 	friend std::istream& operator>>(std::istream& in, MingeFotbal& minge);
 
+	friend std::ifstream& operator>>(std::ifstream& in,MingeFotbal& minge);
+
 	friend int calculareDiferentePret(MingeFotbal& m1, MingeFotbal& m2);
 };
 

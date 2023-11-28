@@ -80,3 +80,30 @@ std::ostream& operator<<(std::ostream& out, EchipamentBjj& echipament)
 
 	return out;
 }
+
+std::ofstream& operator<<(std::ofstream& out, EchipamentBjj& echipament)
+{
+	int lungime = echipament.proprietar.length() + 1;
+	out.write((char*)&lungime, sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		out.write((char*)&echipament.proprietar[i], sizeof(char));
+	}
+	out << echipament.gi;
+	lungime = echipament.centura.getCuloare().length();
+	afisareFisierBinar(out,echipament.centura);
+	return out;
+}
+
+std::ifstream& operator>>(std::ifstream& in, EchipamentBjj& echipament)
+{
+	int lungime;
+	in.read((char*)&lungime,sizeof(int));
+	for (int i = 0; i < lungime; i++)
+	{
+		in.read((char*)&echipament.proprietar[i], sizeof(char));
+	}
+	in >> echipament.gi;
+	citireFisierBinar(in, echipament.centura);
+	return in;
+}

@@ -92,5 +92,9 @@ public:
 	friend std::istream& operator>>(std::istream& in, GiBjj& gi);
 
 	friend std::ostream& operator<<(std::ostream& out, GiBjj& gi);
+
+	friend std::ofstream& operator<<(std::ofstream& out, GiBjj& gi);
+
+	friend std::ifstream& operator>>(std::ifstream& in, GiBjj& gi);
 };
 
