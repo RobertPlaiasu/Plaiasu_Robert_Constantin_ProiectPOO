@@ -30,6 +30,12 @@
     <ClCompile Include="EchipamentBjj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MingeEuropean.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EchipamentCompetitieBjj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MingeFotbal.h">
@@ -45,6 +51,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EchipamentBjj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MingeEuropean.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EchipamentCompetitieBjj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

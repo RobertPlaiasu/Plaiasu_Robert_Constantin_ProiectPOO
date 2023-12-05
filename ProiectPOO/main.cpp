@@ -6,6 +6,8 @@
 #include "CenturaBjj.h"
 #include "GiBjj.h"
 #include "EchipamentBjj.h"
+#include "MingeEuropean.h"
+#include "EchipamentCompetitieBjj.h"
 // Am ales tema Sport - Plaiasu Robert
 
 
@@ -20,6 +22,8 @@ int CenturaBjj::valoareTotala = 0;
 std::string GiBjj::sport = "Bjj";
 int GiBjj::nrGi = 0;
 int GiBjj::valoareTotala = 0;
+
+std::string MingeEuropean::continent = "Europa";
 
 void main()
 {
@@ -269,6 +273,7 @@ void main()
 
 	// faza 6
 	
+    /*
 	std::string nume1 = "Nume1";
 	std::string nume2 = "Nume2";
 	char** nume = new char* [2];
@@ -307,7 +312,7 @@ void main()
 	std::cout << centura1;
 	f4.close();
 
-	GiBjj gi;
+	GiBjj gi(1,888,"Africa",nume,2,"negru","tatami");
 	std::ofstream f5;
 	f5.open("gi.bin",  std::ios::binary| std::ios::out);
 	f5 << gi;
@@ -330,4 +335,26 @@ void main()
 	f8 >> echipament1;
 	std::cout << echipament1;
 	f8.close();
+	*/
+
+	// faza 7
+
+	char** nume = new char* [2];
+	nume[0] = new char[strlen("Caractere1") + 1];
+	nume[1] = new char[strlen("Caractere2") + 1];
+	strcpy_s(nume[0], strlen("Caractere1") + 1, "Caractere1");
+	strcpy_s(nume[1], strlen("Caractere2") + 1, "Caractere2");
+	MingeFotbal mingeSimpla(1,899,"Vietnam",1);
+	MingeEuropean mingeEuropean(2,8999,"Africa",nume,2,1,2016,"Germania");
+	std::cout << mingeEuropean;
+	MingeEuropean mingeEuropean2 = mingeEuropean;
+	std::cout << mingeEuropean2;
+	mingeSimpla = (MingeFotbal&)mingeEuropean;
+	std::cout << mingeSimpla;
+
+	EchipamentBjj echipament1;
+	EchipamentCompetitieBjj echipament2;
+	std::cout << echipament2;
+	echipament1 = (EchipamentBjj&)echipament2;
+	std::cout << echipament1;
 }
