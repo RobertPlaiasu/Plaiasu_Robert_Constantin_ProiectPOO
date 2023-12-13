@@ -1,7 +1,10 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-class MingeFotbal
+#include "AfisareConsola.h"
+#include "HasPret.h"
+
+class MingeFotbal : public AfisareConsola, public HasPret
 {
 private:
 	const int id;

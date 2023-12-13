@@ -8,6 +8,8 @@
 #include "EchipamentBjj.h"
 #include "MingeEuropean.h"
 #include "EchipamentCompetitieBjj.h"
+#include "AfisareConsola.h"
+#include "HasPret.h"
 // Am ales tema Sport - Plaiasu Robert
 
 
@@ -338,7 +340,8 @@ void main()
 	*/
 
 	// faza 7
-
+	
+	/*
 	char** nume = new char* [2];
 	nume[0] = new char[strlen("Caractere1") + 1];
 	nume[1] = new char[strlen("Caractere2") + 1];
@@ -357,4 +360,33 @@ void main()
 	std::cout << echipament2;
 	echipament1 = (EchipamentBjj&)echipament2;
 	std::cout << echipament1;
+	*/
+
+	// faza 8
+
+	AfisareConsola* afisare[5];
+	afisare[0] = new CenturaBjj();
+	afisare[0]->afisare();
+	afisare[1] = new EchipamentBjj();
+	afisare[1]->afisare();
+	afisare[2] = new EchipamentCompetitieBjj();
+	afisare[2]->afisare();
+	afisare[3] = new GiBjj();
+	afisare[3]->afisare();
+	afisare[4] = new MingeFotbal();
+	afisare[4]->afisare();
+
+
+	AfisareConsola* pret[5];
+	pret[0] = new CenturaBjj();
+	pret[0]->afisare();
+	pret[1] = new EchipamentBjj();
+	pret[1]->afisare();
+	pret[2] = new EchipamentCompetitieBjj();
+	pret[2]->afisare();
+	pret[3] = new GiBjj();
+	pret[3]->afisare();
+	pret[4] = new MingeFotbal();
+	pret[4]->afisare();
+
 }

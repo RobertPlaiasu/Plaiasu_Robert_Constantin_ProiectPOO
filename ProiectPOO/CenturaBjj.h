@@ -2,8 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include "Data.h"
+#include "AfisareConsola.h"
+#include "HasPret.h" 
 
-class CenturaBjj
+class CenturaBjj : public AfisareConsola,public HasPret
 {
 private:
 	const int id;

@@ -1,8 +1,9 @@
 #pragma once
 #include "CenturaBjj.h"
 #include "GiBjj.h"
+#include "AfisareConsola.h"
 
-class EchipamentBjj
+class EchipamentBjj : public AfisareConsola
 {
 private:
 	const int id;
@@ -30,6 +31,8 @@ public:
 	void setProprietar(const std::string proprietar);
 
 	std::string getProprietar();
+
+	void afisare();
 
 
 	EchipamentBjj& operator=(const EchipamentBjj& echipament);

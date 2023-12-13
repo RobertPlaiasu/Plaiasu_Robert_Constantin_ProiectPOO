@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include "AfisareConsola.h"
+#include "HasPret.h"
 
-class GiBjj
+class GiBjj : public AfisareConsola, public HasPret
 {
 private:
 	const int id;

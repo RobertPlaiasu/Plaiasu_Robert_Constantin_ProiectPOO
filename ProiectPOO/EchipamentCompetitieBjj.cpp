@@ -41,7 +41,7 @@ void EchipamentCompetitieBjj::setClubSportiv(std::string clubSportiv)
 }
 
 EchipamentCompetitieBjj& EchipamentCompetitieBjj::operator=(const EchipamentCompetitieBjj& echipament)
-{
+{	
 	(EchipamentBjj&)(*this) = (EchipamentBjj&)echipament;
 	this->lungimeCentura = echipament.lungimeCentura;
 	this->clubSportiv = echipament.clubSportiv;

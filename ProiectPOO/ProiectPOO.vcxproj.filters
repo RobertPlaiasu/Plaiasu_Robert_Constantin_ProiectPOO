@@ -59,5 +59,11 @@
     <ClInclude Include="EchipamentCompetitieBjj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AfisareConsola.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HasPret.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

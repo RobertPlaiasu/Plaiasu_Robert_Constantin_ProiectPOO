@@ -136,11 +136,13 @@
     <ClCompile Include="MingeFotbal.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AfisareConsola.h" />
     <ClInclude Include="CenturaBjj.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="EchipamentBjj.h" />
     <ClInclude Include="EchipamentCompetitieBjj.h" />
     <ClInclude Include="GiBjj.h" />
+    <ClInclude Include="HasPret.h" />
     <ClInclude Include="MingeEuropean.h" />
     <ClInclude Include="MingeFotbal.h" />
   </ItemGroup>

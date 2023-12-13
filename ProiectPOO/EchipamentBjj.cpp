@@ -81,6 +81,16 @@ std::ostream& operator<<(std::ostream& out, EchipamentBjj& echipament)
 	return out;
 }
 
+void EchipamentBjj::afisare()
+{
+	std::cout << "\nID : " << this->id;
+	std::cout << "\nProprietar : " << this->proprietar;
+
+	std::cout << this->gi;
+	std::cout << this->centura;
+}
+
+
 std::ofstream& operator<<(std::ofstream& out, EchipamentBjj& echipament)
 {
 	int lungime = echipament.proprietar.length() + 1;
