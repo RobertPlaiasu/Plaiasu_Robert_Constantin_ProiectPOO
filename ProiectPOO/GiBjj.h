@@ -27,7 +27,7 @@ private:
 public:
 	GiBjj();
 
-	GiBjj(GiBjj& gi);
+	GiBjj(const GiBjj& gi);
 
 	GiBjj(int id, int pret, std::string taraFabricatie, char** materialeTextie, int nrMaterialeTextile, std::string culoare, std::string firmaProducatoare);
 

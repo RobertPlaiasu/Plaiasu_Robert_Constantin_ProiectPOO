@@ -377,16 +377,46 @@ void main()
 	afisare[4]->afisare();
 
 
-	AfisareConsola* pret[5];
+	HasPret* pret[5];
 	pret[0] = new CenturaBjj();
-	pret[0]->afisare();
-	pret[1] = new EchipamentBjj();
-	pret[1]->afisare();
-	pret[2] = new EchipamentCompetitieBjj();
-	pret[2]->afisare();
+	std::cout << std::endl << pret[0]->getPret();
+	pret[1] = new CenturaBjj();
+	std::cout << std::endl << pret[1]->getPret();
+	pret[2] = new MingeFotbal();
+	std::cout << std::endl << pret[2]->getPret();
 	pret[3] = new GiBjj();
-	pret[3]->afisare();
+	std::cout << std::endl << pret[3]->getPret();
 	pret[4] = new MingeFotbal();
-	pret[4]->afisare();
+	std::cout << std::endl << pret[4]->getPret();
 
+
+	Data dungi;
+	dungi.an = 2020;
+	dungi.luna = 9;
+	dungi.zi = 29;
+	CenturaBjj centura(88, 99999, "Romania", &dungi, 1, "negru", "tatami");
+
+	std::string nume1 = "Nume1";
+	std::string nume2 = "Nume2";
+	char** nume = new char* [2];
+	nume[0] = new char[nume1.length() + 1];
+	nume[1] = new char[nume2.length() + 1];
+	strcpy_s(nume[0], nume1.length() + 1, nume1.c_str());
+	strcpy_s(nume[1], nume2.length() + 1, nume2.c_str());
+
+	GiBjj gi(1, 888, "Africa", nume, 2, "negru", "tatami");
+	
+	EchipamentBjj echipament;
+	std::cout << std::endl << echipament.getGi()->getPret();
+
+	EchipamentBjj echipament2(1,centura,gi,"John Doe");
+
+	std::cout << std::endl << echipament2.getGi()->getPret();
+	std::cout << std::endl << echipament2.getCentura()->getPret();
+	
+	for (int i = 0; i < 5; i++)
+	{
+		delete afisare[i];
+		delete pret[i];
+	}
 }

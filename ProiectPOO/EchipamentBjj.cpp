@@ -4,44 +4,46 @@
 EchipamentBjj::EchipamentBjj() : id(100)
 {
 	proprietar = "Nu are proprietar !";
-	centura = CenturaBjj();
-	gi = GiBjj();
+	centura = new CenturaBjj();
+	gi = new GiBjj();
 }
 
 EchipamentBjj::EchipamentBjj(int id, CenturaBjj& centura, GiBjj& gi, std::string proprietar) : id(id)
 {
-	this->centura = centura;
-	this->gi = gi;
+	this->centura = new CenturaBjj(centura);
+	this->gi = new GiBjj(gi);
 	this->proprietar = proprietar;
 }
 
 EchipamentBjj::EchipamentBjj(const EchipamentBjj& echipament) : id(echipament.id)
 {
-	this->centura = echipament.centura;
-	this->gi = echipament.gi;
+	this->centura = new CenturaBjj(*(CenturaBjj*)echipament.centura);
+	this->gi = new GiBjj(*(GiBjj*)echipament.gi);
 	this->proprietar = echipament.proprietar;
 }
 
 EchipamentBjj::~EchipamentBjj()
 {
+	delete this->centura;
+	delete this->gi;
 }
 
 void EchipamentBjj::setCentura(const CenturaBjj& centura)
 {
-	this->centura = centura;
+	this->centura = new CenturaBjj(centura);
 }
 
-CenturaBjj& EchipamentBjj::getCentura()
+HasPret* EchipamentBjj::getCentura()
 {
 	return centura;
 }
 
 void EchipamentBjj::setGi(const GiBjj& gi)
 {
-	this->gi = gi;
+	this->gi = new GiBjj(gi);
 }
 
-GiBjj& EchipamentBjj::getGi()
+HasPret* EchipamentBjj::getGi()
 {
 	return  this->gi;
 }
@@ -59,24 +61,20 @@ std::string EchipamentBjj::getProprietar()
 
 EchipamentBjj& EchipamentBjj::operator=(const EchipamentBjj& echipament)
 {
-	this->centura = echipament.centura;
-	this->gi = echipament.gi;
+	this->centura = new CenturaBjj(*(CenturaBjj*)echipament.centura);
+	this->gi = new GiBjj(*(GiBjj*)echipament.gi);
 	this->proprietar = echipament.proprietar;
 	return *this;
 }
 
-EchipamentBjj::operator GiBjj& ()
-{
-	return gi;
-}
 
 std::ostream& operator<<(std::ostream& out, EchipamentBjj& echipament)
 {
 	out << "\nID : " << echipament.id;
 	out << "\nProprietar : " << echipament.proprietar;
 
-	out << echipament.gi;
-	out << echipament.centura;
+	out << "\nPret gi : "  <<echipament.getGi()->getPret();
+	out << "\nPret centura : " << echipament.getCentura()->getPret();
 
 	return out;
 }
@@ -86,34 +84,6 @@ void EchipamentBjj::afisare()
 	std::cout << "\nID : " << this->id;
 	std::cout << "\nProprietar : " << this->proprietar;
 
-	std::cout << this->gi;
-	std::cout << this->centura;
-}
-
-
-std::ofstream& operator<<(std::ofstream& out, EchipamentBjj& echipament)
-{
-	int lungime = echipament.proprietar.length() + 1;
-	out.write((char*)&lungime, sizeof(int));
-	for (int i = 0; i < lungime; i++)
-	{
-		out.write((char*)&echipament.proprietar[i], sizeof(char));
-	}
-	out << echipament.gi;
-	lungime = echipament.centura.getCuloare().length();
-	afisareFisierBinar(out,echipament.centura);
-	return out;
-}
-
-std::ifstream& operator>>(std::ifstream& in, EchipamentBjj& echipament)
-{
-	int lungime;
-	in.read((char*)&lungime,sizeof(int));
-	for (int i = 0; i < lungime; i++)
-	{
-		in.read((char*)&echipament.proprietar[i], sizeof(char));
-	}
-	in >> echipament.gi;
-	citireFisierBinar(in, echipament.centura);
-	return in;
+	std::cout << this->gi->getPret();
+	std::cout << this->centura->getPret();
 }

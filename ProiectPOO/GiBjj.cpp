@@ -10,7 +10,7 @@ GiBjj::GiBjj() : id(100)
 	firmaProducatoare = "";
 }
 
-GiBjj::GiBjj(GiBjj& gi) : id(gi.id)
+GiBjj::GiBjj(const GiBjj& gi) : id(gi.id)
 {
 	setPret(gi.pret);
 	setTaraFabricatie(gi.taraFabricatie);

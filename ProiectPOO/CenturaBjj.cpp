@@ -10,7 +10,7 @@ CenturaBjj::CenturaBjj() : id(100)
 	firmaProducatoare = "";
 }
 
-CenturaBjj::CenturaBjj(CenturaBjj& centura) : id(centura.id)
+CenturaBjj::CenturaBjj(const CenturaBjj& centura) : id(centura.id)
 {
 	setPret(centura.pret);
 	setTaraFabricatie(centura.taraFabricatie);
@@ -219,7 +219,7 @@ CenturaBjj::operator int()
 	return pret;
 }
 
-std::istream& operator>>(std::istream& in, CenturaBjj& centura)
+std::istream& operator>>(std::istream& in,CenturaBjj& centura)
 {
 	std::cout << "\nTara fabricatie : ";
 	in >> centura.taraFabricatie;

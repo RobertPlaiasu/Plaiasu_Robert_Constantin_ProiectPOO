@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AfisareConsola.cpp" />
     <ClCompile Include="CenturaBjj.cpp" />
     <ClCompile Include="EchipamentBjj.cpp" />
     <ClCompile Include="EchipamentCompetitieBjj.cpp" />
     <ClCompile Include="GiBjj.cpp" />
+    <ClCompile Include="HasPret.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MingeEuropean.cpp" />
     <ClCompile Include="MingeFotbal.cpp" />

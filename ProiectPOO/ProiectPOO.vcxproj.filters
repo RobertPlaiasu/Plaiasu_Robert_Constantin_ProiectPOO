@@ -36,6 +36,12 @@
     <ClCompile Include="EchipamentCompetitieBjj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HasPret.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AfisareConsola.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MingeFotbal.h">

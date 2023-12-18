@@ -27,7 +27,7 @@ private:
 public:
 	CenturaBjj();
 
-	CenturaBjj(CenturaBjj& centura);
+	CenturaBjj(const CenturaBjj& centura);
 
 	CenturaBjj(int id, int pret, std::string taraFabricatie, Data* dungi, int nrDungi, std::string culoare, std::string firmaProducatoare);
 

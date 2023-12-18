@@ -5,4 +5,5 @@ class AfisareConsola
 {
 public :
 	virtual void afisare() = 0;
+	virtual ~AfisareConsola();
 };
